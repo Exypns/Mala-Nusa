@@ -1,0 +1,77 @@
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 3rem;
+    padding: 0.75rem 1.5rem;
+
+    border: 1px solid transparent;
+    border-radius: 999px;
+
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+}
+
+.button--primary {
+    color: var(--color-white);
+    background-color: var(--color-teal);
+}
+
+.button--primary:hover {
+    background-color: var(--color-teal-dark);
+}
+
+.button--secondary {
+    color: var(--color-teal-dark);
+    background-color: var(--color-white);
+}
+
+.button--secondary:hover {
+    background-color: var(--color-teal-light);
+}
+
+.button--white {
+    color: var(--color-teal-dark);
+    background-color: var(--color-white);
+}
+
+.button--outline-white {
+    color: var(--color-white);
+    border-color: rgba(255, 255, 255, 0.6);
+    background-color: transparent;
+}
+
+.button--outline-white:hover {
+    color: var(--color-teal-dark);
+    background-color: var(--color-white);
+}
+
+.button--small {
+    min-height: 2.5rem;
+    padding: 0.6rem 1rem;
+
+    font-size: 0.85rem;
+}
+
+.btn-white {
+    background: #fff;
+    color: var(--color-primary);
+}
+
+.btn-white:hover {
+    background: var(--color-primary-light);
+    text-decoration: none;
+}

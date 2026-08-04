@@ -1,0 +1,37 @@
+* {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: auto;
+    font-style: normal;
+}
+
+.container {
+    width: min(calc(100% - 3rem), var(--container-width));
+
+    margin-inline: auto;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 60px;
+    padding: 0px 140px;
+}
+
+@media (max-width: 700px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+        padding: 0px;
+    }
+}
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+
+@media (max-width: 700px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+}

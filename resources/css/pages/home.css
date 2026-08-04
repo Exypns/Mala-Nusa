@@ -1,0 +1,51 @@
+.hero {
+    position: relative;
+    min-height: 560px;
+    display: flex;
+    align-items: center;
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(28, 36, 26, 0.35) 0%,
+            rgba(28, 36, 26, 0.65) 100%
+        ),
+        url("../../../public/images/welcomesection.jpg");
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+}
+
+.hero-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.hero-label {
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 16px;
+}
+
+.hero h1 {
+    color: #fff;
+    max-width: 640px;
+    margin-bottom: 20px;
+    font-size: clamp(32px, 5vw, 52px);
+}
+
+.hero .sub {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 560px;
+    margin-bottom: 32px;
+    line-height: 1.6;
+}
+
+.hero .cta-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
