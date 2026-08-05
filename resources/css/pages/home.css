@@ -1,6 +1,6 @@
 .hero {
     position: relative;
-    min-height: 560px;
+    min-height: 650px;
     display: flex;
     align-items: center;
     background-image:
@@ -26,21 +26,24 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 16px;
+    margin-bottom: 6px;
 }
 
 .hero h1 {
     color: #fff;
+    font-family: "Cormorant Garamond", serif;
     max-width: 640px;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     font-size: clamp(32px, 5vw, 52px);
+    font-weight: 500;
+    font-style: normal;
 }
 
 .hero .sub {
     font-size: 18px;
     color: rgba(255, 255, 255, 0.9);
     max-width: 560px;
-    margin-bottom: 32px;
+    margin-bottom: 25px;
     line-height: 1.6;
 }
 
@@ -48,4 +51,248 @@
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
+}
+
+.experiences {
+    padding: 40px 0;
+}
+
+.section-header {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 30px;
+}
+
+.experience-title {
+    color: var(--color-primary-dark);
+    margin-bottom: 5px;
+}
+
+.experience-second-title {
+    color: var(--color-text);
+    margin-bottom: 5px;
+}
+
+/* Outer Wrapper untuk outer background */
+.features-section {
+    width: 100%;
+    background-color: #556b54; /* Green sage utama */
+    display: flex;
+    justify-content: center;
+    padding: 80px 24px;
+}
+
+/* Inner Container untuk membatasi max-width */
+.features-container {
+    max-width: 1100px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    color: #ffffff;
+}
+
+/* Kolom Kiri: Headline & Subtitle */
+.left-column h2 {
+    font-family: "Georgia", serif; /* Font Serif miring untuk judul utama */
+    font-size: 52px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.1;
+    margin-bottom: 24px;
+}
+
+.left-column h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.left-column p {
+    font-size: 16px;
+    color: #e0e6df;
+    line-height: 1.5;
+    max-width: 420px;
+}
+
+/* Kolom Kanan: Feature List */
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+/* Icon Container */
+.feature-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-icon img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+/* Content Feature */
+.feature-text h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    padding-top: 8px;
+}
+
+.feature-text p {
+    font-size: 15px;
+    color: #d8e2d7;
+    line-height: 1.5;
+}
+
+.impact-section {
+    width: 100%;
+    background-color: #ffffff; /* Container Tengah Putih */
+    padding: 50px 24px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.impact-container {
+    max-width: 650px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.impact-title {
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #333333;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.impact-subtitle {
+    font-size: 32px;
+    font-weight: 700;
+    color: #2b2b2b;
+    margin-bottom: 16px;
+    line-height: 1;
+}
+
+.impact-description {
+    font-size: 15px;
+    color: #4a4a4a;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.btn-impact {
+    background-color: #556b54;
+    color: #ffffff;
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease;
+}
+
+.btn-impact:hover {
+    background-color: #465945;
+}
+
+.btn-impact:active {
+    transform: scale(0.98);
+}
+
+.cta-section {
+    width: 100%;
+    background-color: #dce1dc;
+    padding: 80px 24px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.cta-container {
+    max-width: 700px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cta-title {
+    font-size: 36px;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+}
+
+.cta-description {
+    font-size: 16px;
+    color: #4a504a;
+    margin-bottom: 32px;
+}
+
+/* Layout Dua Tombol Samping-sampingan */
+.button-group {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap; /* Auto drop ke bawah kalau di layar HP sempit */
+}
+
+.btn-cta {
+    background-color: #556b54;
+    color: #ffffff;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease;
+}
+
+.btn-cta:hover {
+    background-color: #465945;
+}
+
+.btn-cta:active {
+    transform: scale(0.98);
+}
+
+/* Responsive untuk layar HP/Tablet */
+@media (max-width: 768px) {
+    .features-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .left-column h2 {
+        font-size: 40px;
+    }
 }
