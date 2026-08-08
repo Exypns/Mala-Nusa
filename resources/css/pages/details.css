@@ -1,0 +1,934 @@
+/* Section Wrapper */
+.detail-hero-section {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 100px 24px 40px; /* Top padding disesuaikan agar tidak tertutup navbar */
+}
+
+/* Breadcrumbs */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #7a7a7a;
+    margin-bottom: 24px;
+    font-weight: 500;
+}
+
+.breadcrumb a {
+    color: #2b2b2b;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+    color: #556b54;
+}
+
+.breadcrumb .separator {
+    color: #b0b0b0;
+}
+
+/* Slider Main Container */
+.slider-container {
+    position: relative;
+    width: 100%;
+    height: 480px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    user-select: none;
+    touch-action: pan-y;
+}
+
+/* Track Pembungkus Gambar */
+.slider-track {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    cursor: grab;
+}
+
+.slider-track:active {
+    cursor: grabbing;
+}
+
+/* Slide Gambar Individual */
+.slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none; /* Mencegah bug drag gambar bawaan browser */
+}
+
+/* Floating Card Info di Pojok Kiri Bawah */
+.hero-info-card {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 18px 28px;
+    border-radius: 20px;
+    max-width: 430px;
+    z-index: 10;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.hero-info-card h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+}
+
+.hero-info-card p {
+    font-size: 14px;
+    color: #555555;
+    line-height: 1.5;
+}
+
+/* Indikator Swipe (Dots) di Pojok Kanan Bawah */
+.slider-indicators {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    padding: 8px 14px;
+    border-radius: 999px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    width: 24px; /* Efek pill horizontal untuk slide aktif */
+    border-radius: 999px;
+    background: #ffffff;
+}
+
+/* Navigation Arrows (Muncul saat hover) */
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.85);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.slider-container:hover .nav-arrow {
+    opacity: 1;
+}
+
+.nav-arrow:hover {
+    background: #ffffff;
+    transform: translateY(-50%) scale(1.08);
+}
+
+.nav-arrow.prev {
+    left: 16px;
+}
+.nav-arrow.next {
+    right: 16px;
+}
+
+.nav-arrow svg {
+    width: 20px;
+    height: 20px;
+    stroke: #2b2b2b;
+    stroke-width: 2.5;
+    fill: none;
+}
+
+/* Container Section Utama */
+.overview-section {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0px 24px 80px;
+}
+
+.overview-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 32px;
+    letter-spacing: -0.5px;
+}
+
+/* Layout Grid 2 Kolom (Naratif & Card Sticky/Side) */
+.overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 60px;
+    align-items: start;
+}
+
+/* Kolom Kiri: Narrative Paragraphs */
+.overview-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    line-height: 1.65;
+    color: #333333;
+    font-size: 15px;
+}
+
+.overview-content p {
+    margin: 0;
+}
+
+/* Kolom Kanan: Card Specs & Buttons */
+.overview-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: sticky;
+    top: 100px; /* Menempel saat discroll jika navbar fixed */
+}
+
+/* Spec Card Component */
+.specs-card {
+    border: 1px solid #d4dfd2; /* Border sage lembut */
+    border-radius: 20px;
+    padding: 28px 24px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.spec-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.spec-icon {
+    width: 22px;
+    height: 22px;
+    stroke: #556b54;
+    stroke-width: 1.8;
+    fill: none;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.spec-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.spec-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.spec-value {
+    font-size: 14px;
+    color: #555555;
+}
+
+/* Action Buttons */
+.overview-btn-primary {
+    width: 100%;
+    background-color: #536752; /* Deep Sage Green */
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.overview-btn-primary:hover {
+    background-color: #435442;
+}
+
+.overview-btn-outline {
+    width: 100%;
+    background-color: transparent;
+    color: #536752;
+    border: 1px solid #536752;
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.overview-btn-outline:hover {
+    background-color: rgba(83, 103, 82, 0.05);
+}
+
+/* Container Utama Section */
+.timeline-section {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 24px;
+}
+
+.timeline-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 48px;
+    letter-spacing: -0.5px;
+}
+
+/* Grid Layout Timeline */
+/* 1. Atur Grid & Hilangkan Gap Horizontal untuk Garis Menyambung */
+.timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 0; /* Ubah gap jadi 0 agar garis saling bersentuhan */
+    row-gap: 50px;
+}
+
+/* Berikan padding pada item agar teks antar kolom tidak bertabrakan */
+.timeline-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 24px; /* Pengganti column-gap untuk teks */
+}
+
+/* 2. Garis Horizontal Full Width */
+.timeline-node {
+    position: relative;
+    width: 100%;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.timeline-node::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%; /* Garis membentang penuh ke tepi item berikutnya */
+    height: 2px;
+    background-color: #a4b4a2;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+/* Matikan garis pada item paling akhir di baris */
+.timeline-item.last-in-row .timeline-node::before {
+    display: none;
+}
+
+/* 3. Dot Indikator (Outer Ring Menggunakan Border) */
+.timeline-dot {
+    position: relative;
+    z-index: 2;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #536752; /* Warna titik tengah */
+    border: 3px solid #ffffff; /* Celah putih antara titik & ring luar */
+    outline: 2px solid #536752; /* Ring luar */
+    flex-shrink: 0;
+}
+
+/* Konten Teks */
+.timeline-time {
+    font-size: 15px;
+    font-weight: 700;
+    color: #536752;
+    margin-bottom: 6px;
+}
+
+.timeline-item-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.35;
+    margin-bottom: 8px;
+}
+
+.timeline-description {
+    font-size: 13.5px;
+    color: #555555;
+    line-height: 1.5;
+}
+
+/* Section Container */
+.info-section {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 24px 100px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.section-subtitle {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 28px;
+}
+
+/* --- KOLOM KIRI: What's Included --- */
+.included-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.included-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid #e2e8e0;
+    font-size: 14.5px;
+    color: #333333;
+    line-height: 1.4;
+}
+
+.included-item:first-child {
+    padding-top: 0;
+}
+
+/* Custom Check SVG */
+.icon-check {
+    width: 16px;
+    height: 16px;
+    stroke: #536752; /* Deep Sage Green */
+    stroke-width: 2.2;
+    fill: none;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* Custom Cross SVG (Excluded) */
+.included-item.excluded {
+    color: #777777;
+}
+
+.icon-cross {
+    width: 16px;
+    height: 16px;
+    stroke: #a0a0a0;
+    stroke-width: 2;
+    fill: none;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* --- KOLOM KANAN: Good to Know --- */
+.info-group-container {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.info-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.info-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #536752; /* Deep Sage Accent */
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.info-desc {
+    font-size: 14px;
+    color: #444444;
+    line-height: 1.55;
+}
+
+.info-desc strong {
+    color: #1a1a1a;
+}
+
+/* Section Container */
+.faq-section {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0px 24px 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+}
+
+/* --- TRANSPARENCY CARD (Where your money goes) --- */
+.transparency-card {
+    background-color: #536752; /* Sage Green sesuai tema utama */
+    color: #ffffff;
+    padding: 40px 48px;
+    border-radius: 20px;
+    box-shadow: 0 12px 32px rgba(83, 103, 82, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Aksesori aksen background halus */
+.transparency-card::after {
+    content: "";
+    position: absolute;
+    right: -40px;
+    bottom: -40px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+}
+
+.transparency-badge {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #d2ded0; /* Soft Light Sage */
+    margin-bottom: 12px;
+    display: inline-block;
+}
+
+.transparency-title {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 16px;
+    letter-spacing: -0.3px;
+}
+
+.transparency-desc {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #f0f4ef;
+    max-width: 780px;
+}
+
+/* --- FAQ ACCORDION SECTION --- */
+.faq-header {
+    margin-bottom: 24px;
+}
+
+.faq-main-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: -0.3px;
+}
+
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #e2e8e0;
+}
+
+/* Details / Summary Component Native */
+.faq-item {
+    border-bottom: 1px solid #e2e8e0;
+    transition: background-color 0.2s ease;
+}
+
+.faq-item[open] {
+    background-color: #f9fbf9; /* Soft tint saat terbuka */
+}
+
+.faq-summary {
+    list-style: none;
+    padding: 22px 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    transition: color 0.2s ease;
+}
+
+.faq-summary::-webkit-details-marker {
+    display: none; /* Hilangkan panah default browser */
+}
+
+.faq-summary:hover {
+    color: #536752;
+}
+
+/* Icon Toggle Chevron Custom */
+.faq-icon {
+    width: 20px;
+    height: 20px;
+    stroke: #536752;
+    stroke-width: 2;
+    fill: none;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    margin-left: 16px;
+}
+
+.faq-item[open] .faq-icon {
+    transform: rotate(180deg);
+}
+
+/* Content Teks FAQ */
+.faq-content {
+    padding: 0 8px 24px 8px;
+    font-size: 14.5px;
+    color: #555555;
+    line-height: 1.65;
+}
+
+/* Outer Wrapper Section */
+.details-cta-wrapper {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0px 24px 80px;
+}
+
+/* Container Banner Utama */
+.details-cta-container {
+    background-color: #f2f6f1; /* Soft Sage Background Tint */
+    border-radius: 24px;
+    padding: 64px 32px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #e1ebe0;
+}
+
+/* Judul Utama */
+.details-cta-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+    line-height: 1.2;
+}
+
+/* Subtitle Deskripsi */
+.details-cta-subtitle {
+    font-size: 15px;
+    color: #555555;
+    max-width: 540px;
+    line-height: 1.5;
+    margin-bottom: 32px;
+}
+
+/* Wrapper Tombol CTA */
+.details-cta-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+}
+
+/* Styling Tombol Dasar */
+.details-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 50px; /* Pill Shape Modern */
+    text-decoration: none;
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+/* Tombol Utama (Primary) - WhatsApp */
+.details-cta-btn-primary {
+    background-color: #536752;
+    color: #ffffff;
+    border: 2px solid #536752;
+    box-shadow: 0 4px 14px rgba(83, 103, 82, 0.25);
+}
+
+.details-cta-btn-primary:hover {
+    background-color: #425341;
+    border-color: #425341;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(83, 103, 82, 0.35);
+}
+
+.details-cta-btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Tombol Kedua (Secondary) - See Other Experiences */
+.details-cta-btn-secondary {
+    background-color: transparent;
+    color: #536752;
+    border: 2px solid #536752;
+}
+
+.details-cta-btn-secondary:hover {
+    background-color: rgba(83, 103, 82, 0.08);
+    transform: translateY(-2px);
+}
+
+.details-cta-btn-secondary:active {
+    transform: translateY(0);
+}
+
+/* Metadata Footer Info */
+.details-cta-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 13px;
+    color: #666666;
+    flex-wrap: wrap;
+}
+
+.cta-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.meta-divider {
+    color: #b5c4b3;
+}
+
+/* Icon SVG Ukuran Presisi */
+.icon-wa {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+/* Responsive Scaling */
+@media (max-width: 640px) {
+    .details-cta-container {
+        padding: 44px 20px;
+        border-radius: 18px;
+    }
+
+    .details-cta-title {
+        font-size: 24px;
+    }
+
+    .details-cta-subtitle {
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+
+    .details-cta-actions {
+        width: 100%;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .details-cta-btn {
+        width: 100%;
+    }
+
+    .cta-meta {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .meta-divider {
+        display: none;
+    }
+}
+
+/* Responsive adjustment */
+@media (max-width: 640px) {
+    .transparency-card {
+        padding: 28px 24px;
+        border-radius: 16px;
+    }
+
+    .transparency-title {
+        font-size: 22px;
+    }
+
+    .transparency-desc {
+        font-size: 14px;
+    }
+
+    .faq-summary {
+        font-size: 15px;
+        padding: 18px 4px;
+    }
+}
+
+/* Responsive untuk Tablet & Mobile */
+@media (max-width: 768px) {
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+
+    .info-section {
+        padding: 40px 20px 60px;
+    }
+}
+
+/* --- RESPONSIVE DESIGN --- */
+/* Tablet (3 Kolom) */
+@media (max-width: 992px) {
+    .timeline-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .timeline-item.last-in-row {
+        grid-column: auto;
+    }
+}
+
+/* Mobile (Berubah ke Timeline Vertikal) */
+@media (max-width: 640px) {
+    .timeline-grid {
+        grid-template-columns: 1fr;
+        row-gap: 32px;
+        padding-left: 20px;
+    }
+
+    .timeline-node::before {
+        width: 2px !important;
+        height: calc(100% + 40px);
+        left: 7px;
+        top: 8px;
+        transform: none;
+    }
+
+    .timeline-item {
+        padding-left: 24px;
+    }
+
+    .timeline-node {
+        position: absolute;
+        left: -20px;
+        top: 0;
+        width: auto;
+    }
+
+    .timeline-item.last-in-row .timeline-node::before {
+        display: none;
+    }
+}
+
+/* Responsive untuk Tablet & Mobile */
+@media (max-width: 868px) {
+    .overview-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .overview-sidebar {
+        position: static; /* Hilangkan sticky di layar kecil */
+        order: -1; /* Pindahkan card ke atas di mobile jika diperlukan, atau hapus baris ini agar tetap di bawah */
+    }
+
+    .overview-title {
+        font-size: 26px;
+        margin-bottom: 24px;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .detail-hero-section {
+        padding: 80px 16px 24px;
+    }
+
+    .slider-container {
+        height: 420px;
+        border-radius: 18px;
+    }
+
+    .hero-info-card {
+        bottom: 16px;
+        left: 16px;
+        right: 16px;
+        max-width: none;
+        padding: 16px 20px;
+        border-radius: 16px;
+    }
+
+    .hero-info-card h1 {
+        font-size: 20px;
+    }
+
+    .hero-info-card p {
+        font-size: 13px;
+    }
+
+    .slider-indicators {
+        top: 16px;
+        bottom: auto;
+        right: 16px;
+    }
+
+    .nav-arrow {
+        display: none; /* Sembunyikan arrow di mobile, fokus full gesture touch */
+    }
+}
