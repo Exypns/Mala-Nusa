@@ -1,0 +1,674 @@
+/* ==========================================
+   HERO IMPACT SECTION
+   ========================================== */
+.hero-impact {
+    position: relative;
+    width: 100%;
+    min-height: 70vh; /* Tinggi hero section */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Ganti path gambar berikut sesuai aset lokal kamu */
+    background-image: url("../../../public/images/first.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-no-repeat;
+    padding: 120px 20px 60px;
+}
+
+/* Layer Overlay Gelap Tipis */
+.hero-impact .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.4) 0%,
+        rgba(0, 0, 0, 0.25) 50%,
+        rgba(0, 0, 0, 0.5) 100%
+    );
+    z-index: 1;
+}
+
+/* Container Teks Tengah */
+.hero-impact .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    text-align: center;
+    color: #ffffff;
+    margin: 0 auto;
+}
+
+/* Judul Utama */
+.hero-impact .hero-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 56px;
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 5px;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+/* Subtitle / Deskripsi */
+.hero-impact .hero-description {
+    font-family:
+        system-ui,
+        -apple-system,
+        sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0 auto;
+    letter-spacing: 0.3px;
+}
+
+/* Utility Class untuk Break Line Desktop */
+.desktop-only {
+    display: block;
+}
+
+/* ==========================================
+   RESPONSIVE MOBILE VIEW (Screen <= 768px)
+   ========================================== */
+@media (max-width: 768px) {
+    .hero-impact {
+        min-height: 70vh;
+        padding: 140px 24px 60px;
+    }
+
+    .hero-impact .hero-title {
+        font-size: 36px;
+        margin-bottom: 16px;
+    }
+
+    .hero-impact .hero-description {
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    .desktop-only {
+        display: inline; /* Matikan breakline kaku di layar hp */
+    }
+}
+
+/* Section Wrapper */
+.mechanism-section {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 24px;
+}
+
+/* Header Container */
+.mechanism-header {
+    margin-bottom: 40px;
+}
+
+.mechanism-tag {
+    font-size: 18px;
+    font-weight: 700;
+    color: #536752; /* Deep Sage Accent */
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.mechanism-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    margin-bottom: 6px;
+}
+
+.mechanism-subtitle {
+    font-size: 16px;
+    color: #666666;
+    max-width: 620px;
+    line-height: 1.5;
+}
+
+/* Grid Cards Container */
+.mechanism-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+/* Individual Card */
+.mechanism-card {
+    background-color: #fcfdfe;
+    border: 1px solid #e2e8e0;
+    border-radius: 20px;
+    padding: 36px 28px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mechanism-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(83, 103, 82, 0.08);
+    border-color: #c5d4c3;
+    background-color: #ffffff;
+}
+
+/* Top Row in Card: Icon & Step Badge */
+.card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+/* Icon Box */
+.card-icon-box {
+    width: 48px;
+    height: 48px;
+    background-color: #f0f4ef;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #536752;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+.mechanism-card:hover .card-icon-box {
+    background-color: #536752;
+    color: #ffffff;
+}
+
+.card-icon {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+}
+
+/* Step Number Badge */
+.step-number {
+    font-size: 13px;
+    font-weight: 700;
+    color: #889987;
+    background: #f4f6f4;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+/* Card Typography */
+.card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.card-desc {
+    font-size: 14.5px;
+    color: #555555;
+    line-height: 1.6;
+}
+
+/* Responsive Scaling */
+@media (max-width: 900px) {
+    .mechanism-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .mechanism-section {
+        padding: 50px 20px;
+    }
+
+    .mechanism-title {
+        font-size: 28px;
+    }
+
+    .mechanism-card {
+        padding: 28px 24px;
+    }
+}
+
+.field-stories-section {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0px 24px 80px 24px;
+}
+
+/* Header */
+.section-header {
+    margin-bottom: 40px;
+}
+
+.section-tag {
+    font-size: 18px;
+    font-weight: 700;
+    color: #536752;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.section-title {
+    font-size: 34px;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: -0.5px;
+}
+
+/* Alert / Notice Banner */
+.notice-banner {
+    background: #ffffff;
+    border: 1px solid #e2e8e0;
+    border-radius: 20px;
+    padding: 28px 32px;
+    margin-bottom: 48px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.notice-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #536752;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.notice-header svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+}
+
+.notice-body {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.notice-text {
+    font-size: 14.5px;
+    color: #555555;
+    line-height: 1.6;
+    max-width: 620px;
+}
+
+.notice-btn-follow {
+    background-color: #536752;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    transition:
+        background-color 0.3s ease,
+        transform 0.2s ease;
+}
+
+.btn-follow:hover {
+    background-color: #425341;
+    transform: translateY(-2px);
+}
+
+/* Story Cards Container */
+.story-cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* Story Card Item */
+.story-card {
+    background: #ffffff;
+    border: 1px solid #e2e8e0;
+    height: 240px;
+    border-radius: 24px;
+    overflow: hidden;
+    display: flex;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    transition:
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.3s ease;
+    position: relative;
+}
+
+.story-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+}
+
+/* Direction Reverse for Alternate Card */
+.story-card.reverse {
+    flex-direction: row-reverse;
+}
+
+/* Card Image Container */
+.story-card-image {
+    width: 42%;
+    min-height: 220px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 24px;
+}
+
+.story-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.story-card:hover .story-card-image img {
+    transform: scale(1.05);
+}
+
+/* Card Content Container */
+.story-card-content {
+    width: 58%;
+    padding: 32px 36px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.story-tag {
+    font-size: 14px;
+    font-weight: 700;
+    color: #536752;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.story-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.35;
+    margin-bottom: 4px;
+}
+
+.story-excerpt {
+    font-size: 14px;
+    color: #666666;
+    line-height: 1.6;
+}
+
+/* Status Badge */
+.status-badge {
+    position: absolute;
+    bottom: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #536752;
+    padding: 6px 16px;
+}
+
+.story-card:not(.reverse) .status-badge {
+    right: 0;
+    border-top-left-radius: 12px;
+}
+
+.story-card.reverse .status-badge {
+    left: 0;
+    border-top-right-radius: 12px;
+}
+
+/* ==========================================
+       SCROLL ANIMATION CLASSES
+       ========================================== */
+.animate-scroll {
+    opacity: 0;
+    transform: translateY(36px);
+    transition:
+        opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.animate-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================
+       RESPONSIVE MOBILE VIEW
+       ========================================== */
+@media (max-width: 768px) {
+    .field-stories-section {
+        padding: 50px 20px;
+    }
+
+    .story-card {
+        height: max-content;
+    }
+
+    .notice-body {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .story-card,
+    .story-card.reverse {
+        flex-direction: column;
+    }
+
+    .story-card-image,
+    .story-card-content {
+        width: 100%;
+    }
+
+    .story-card-image {
+        height: 200px;
+    }
+
+    .story-card-content {
+        padding: 24px 24px 44px;
+    }
+
+    .story-title {
+        font-size: 18px;
+    }
+
+    .story-card.reverse .status-badge {
+        left: auto;
+        right: 0;
+        border-top-right-radius: 0;
+        border-top-left-radius: 12px;
+    }
+}
+
+/* Full-Width Section Base */
+.cta-impact-section {
+    width: 100%;
+    background-color: #2d3b2d; /* Deep Sage Green Mala Nusa */
+    color: #ffffff;
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Subtle Background Noise / Light Glow Effect */
+.cta-impact-section::before {
+    content: "";
+    position: absolute;
+    top: -200px;
+    right: -100px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(
+        circle,
+        rgba(136, 168, 134, 0.12) 0%,
+        rgba(0, 0, 0, 0) 70%
+    );
+    pointer-events: none;
+}
+
+/* Inner Centered Container */
+.cta-impact-inner-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Left Side Content */
+.cta-impact-left-content {
+    max-width: 640px;
+}
+
+.cta-impact-tagline {
+    font-size: 16px;
+    font-weight: 700;
+    color: #a3c2a0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.cta-impact-heading {
+    font-family: "Georgia", serif;
+    font-size: 44px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.cta-impact-heading em {
+    font-style: italic;
+    color: #c5d4c3;
+}
+
+.cta-impact-body-text {
+    font-size: 16px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+/* Right Side Action Buttons */
+.cta-impact-right-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 280px;
+}
+
+/* Buttons Style */
+.cta-impact-btn-full-primary {
+    background-color: #ffffff;
+    color: #2d3b2d !important;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 18px 32px;
+    border-radius: 10px;
+    text-decoration: none;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.cta-impact-btn-full-primary:hover {
+    background-color: #f0f4ef;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+
+.cta-impact-btn-full-secondary {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 17px 32px;
+    border-radius: 10px;
+    text-decoration: none;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(6px);
+}
+
+.cta-impact-btn-full-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.45);
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+       RESPONSIVE MOBILE VIEW
+       ========================================== */
+@media (max-width: 900px) {
+    .cta-impact-section {
+        padding: 70px 0;
+    }
+
+    .cta-impact-inner-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 36px;
+        padding: 0 24px;
+    }
+
+    .cta-impact-heading {
+        font-size: 30px;
+    }
+
+    .cta-impact-body-text {
+        font-size: 15px;
+    }
+
+    .cta-impact-right-actions {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .btn-full-primary,
+    .btn-full-secondary {
+        width: 100%;
+    }
+}

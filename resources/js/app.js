@@ -25,6 +25,45 @@
 })();
 
 document.addEventListener("DOMContentLoaded", () => {
+    const btnToggle = document.getElementById("btnToggle");
+    const navDock = document.getElementById("navDock");
+    const menuBackdrop = document.getElementById("menuBackdrop");
+
+    function toggleMenu() {
+        navDock.classList.toggle("open");
+        menuBackdrop.classList.toggle("active");
+    }
+
+    if (btnToggle) {
+        btnToggle.addEventListener("click", toggleMenu);
+        menuBackdrop.addEventListener("click", toggleMenu);
+    }
+});
+
+// IMPACT ANIMATION
+
+document.addEventListener("DOMContentLoaded", () => {
+    const observerOptions = {
+        root: null,
+        rootMargin: "0px 0px -50px 0px", // Trigger sedikit sebelum elemen masuk penuh
+        threshold: 0.15,
+    };
+
+    const scrollObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target); // Animasi dipicu sekali saja
+            }
+        });
+    }, observerOptions);
+
+    // Targetkan semua elemen bertag .animate-scroll
+    const animatedElements = document.querySelectorAll(".animate-scroll");
+    animatedElements.forEach((el) => scrollObserver.observe(el));
+});
+
+document.addEventListener("DOMContentLoaded", () => {
     const track = document.getElementById("sliderTrack");
     const slides = Array.from(track.children);
     const prevBtn = document.getElementById("prevBtn");
