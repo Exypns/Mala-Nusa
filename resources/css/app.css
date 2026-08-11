@@ -11,6 +11,7 @@
 @import "./pages/about.css";
 @import "./pages/details.css";
 @import "./pages/impact.css";
+@import "./pages/explore.css";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
