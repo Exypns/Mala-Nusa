@@ -12,6 +12,7 @@
 @import "./pages/details.css";
 @import "./pages/impact.css";
 @import "./pages/explore.css";
+@import "./pages/contact.css";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
