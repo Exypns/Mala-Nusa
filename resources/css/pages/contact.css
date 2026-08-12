@@ -1,7 +1,7 @@
 /* Section Wrapper */
 .contact-hero-section {
     width: 100%;
-    padding: 130px 24px 20px;
+    padding: 140px 24px 20px;
     position: relative;
     overflow: hidden;
 }
@@ -70,7 +70,7 @@
     color: #2d3b2d !important;
     border: 1px solid #d8e2d7;
     padding: 12px 24px;
-    border-radius: 50px;
+    border-radius: 10px;
     font-size: 14px;
     font-weight: 600;
     text-decoration: none;
@@ -154,11 +154,10 @@
 }
 
 .info-header-title {
-    font-family: "Georgia", serif;
     font-size: 32px;
-    font-weight: 400;
-    color: #1a241a;
-    line-height: 1.25;
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.2;
     margin-bottom: 36px;
 }
 
@@ -202,6 +201,10 @@
     color: #6a7869;
 }
 
+.contact-label > strong {
+    font-style: italic;
+}
+
 .contact-value {
     font-size: 16px;
     font-weight: 600;
@@ -232,10 +235,9 @@
 }
 
 .form-title {
-    font-family: "Georgia", serif;
     font-size: 32px;
-    font-weight: 400;
-    color: #1a241a;
+    font-weight: 600;
+    color: var(--color-primary);
     margin-bottom: 8px;
 }
 
@@ -302,7 +304,7 @@
     font-size: 15px;
     font-weight: 600;
     padding: 16px 28px;
-    border-radius: 50px;
+    border-radius: 10px;
     border: none;
     cursor: pointer;
     display: inline-flex;
@@ -323,7 +325,7 @@
     font-size: 12px;
     color: #888888;
     text-align: center;
-    margin-top: 12px;
+    margin-top: 0px;
     line-height: 1.4;
 }
 
@@ -333,6 +335,10 @@
 @media (max-width: 960px) {
     .contact-grid-card {
         grid-template-columns: 1fr;
+    }
+
+    .contact-hero-section {
+        padding: 130px 24px 20px;
     }
 
     .contact-info-panel,

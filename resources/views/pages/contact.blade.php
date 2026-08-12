@@ -55,7 +55,7 @@
                 </svg>
               </div>
               <div class="contact-details">
-                <span class="contact-label">WhatsApp — Fastest</span>
+                <span class="contact-label">WhatsApp -<strong> Fastest </strong> </span>
                 <a href="https://wa.me/6281138274321" class="contact-value">+62 811 3827 4321</a>
                 <p class="contact-note">Typically respond within a few hours · WITA / UTC+8</p>
               </div>
@@ -103,7 +103,7 @@
               <div class="contact-details">
                 <span class="contact-label">Location</span>
                 <span class="contact-value">Labuan Bajo, Manggarai Barat</span>
-                <p class="contact-note">Legally registered in Labuan Bajo. Programs run in Warloka Pesisir (~40 min north by car). Want to meet in person? We prefer a café in Labuan Bajo — just WhatsApp us first.</p>
+                <p class="contact-note">Legally registered in Labuan Bajo. Programs run in Warloka Pesisir (~40 min north by car). Want to meet in person? We prefer a café in Labuan Bajo, just WhatsApp us first.</p>
               </div>
             </div>
 
@@ -159,7 +159,7 @@
           </button>
 
           <p class="form-footer-note">
-            We'll get back to you by email — usually within 24 hours. For urgent inquiries, please contact us on WhatsApp.
+            We'll get back to you by email, usually within 24 hours. For urgent inquiries, please contact us on WhatsApp.
           </p>
         </form>
       </div>
