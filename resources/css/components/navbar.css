@@ -1,71 +1,3 @@
-/* 
-nav {
-    position: absolute;
-    width: 100%;
-    top: 10;
-    z-index: 100;
-    background-color: transparent;
-    backdrop-filter: none;
-    display: flex;
-    padding: 0 80px;
-}
-
-.nav-inner {
-    align-items: center;
-    height: 64px;
-    display: flex;
-    flex-grow: 1;
-    flex-shrink: 1;
-}
-
-.nav-logo {
-    font-size: 18px;
-    font-weight: 600;
-    color: white;
-    letter-spacing: -0.02em;
-}
-
-.nav-logo span {
-    color: var(--color-text-light);
-    font-weight: 400;
-    font-size: 13px;
-    margin-left: 6px;
-}
-
-.nav-links {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    justify-items: center;
-}
-
-.nav-links a {
-    font-size: 14px;
-    color: white;
-    padding: 8px 14px;
-    border-radius: var(--radius);
-    transition: all 0.15s;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-    color: white;
-    background: rgba(226, 226, 226, 0.4);
-    text-decoration: none;
-    border-radius: 10px;
-}
-
-.nav-cta {
-    background: var(--color-primary) !important;
-    color: #fff !important;
-    padding: 8px 18px !important;
-}
-
-.nav-cta:hover {
-    background: var(--color-primary-dark) !important;
-}
- */
-
 /* BASE NAVBAR (Kondisi Awal / Top Page) */
 .navbar {
     position: fixed !important;
@@ -84,13 +16,11 @@ nav {
         box-shadow 0.3s ease !important;
 }
 
-.navbar .logo {
-    font-family: "Georgia", serif;
-    font-size: 24px;
-    color: #ffffff !important;
-    text-decoration: none;
-    line-height: 0.7;
-    transition: color 0.3s ease !important;
+.logo img {
+    width: 60px;
+    height: auto;
+    max-width: none;
+    transition: 0.3s ease !important;
 }
 
 .navbar .nav-links {
@@ -108,20 +38,34 @@ nav {
     transition: color 0.3s ease;
 }
 
+.book-btn {
+    background: var(--color-primary);
+    border-radius: 10px;
+    color: white !important;
+}
+
+.book-btn:hover {
+    background-color: var(--color-primary-light) !important;
+    transform: translateY(0px);
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease;
+}
+
 /* KONDISI SETELAH DI-SCROLL (.scrolled) */
 .navbar.scrolled {
-    background-color: #ffffff !important; /* Background berubah putih */
-    padding: 20px 60px !important; /* Opsional: navbar sedikit diperkecil */
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08) !important; /* Shadow halus */
+    background-color: #ffffff !important;
+    padding: 20px 60px !important;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
 }
 
 .navbar.scrolled .logo,
 .navbar.scrolled .nav-links a {
-    color: var(--color-primary) !important;
+    color: var(--color-primary);
 }
 
 .navbar .scrolled .nav-links a:hover {
-    color: #556b54; /* Hover state saat navbar putih */
+    color: #556b54;
 }
 
 .nav-links a:hover,
@@ -148,4 +92,228 @@ nav {
     padding: 8px 14px;
     font-weight: 400;
     transition: color 0.3s ease;
+}
+
+/* Default Hide Mobile Controls di Desktop */
+.mobile-nav-container {
+    display: none;
+}
+
+@media screen and (max-width: 960px) {
+    /* Sembunyikan navbar desktop bawaan */
+    .navbar {
+        position: relative;
+        padding: 10px 10px;
+        background: transparent !important;
+        align-items: center;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0) !important;
+    }
+
+    .navbar-with-bg {
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0) !important;
+    }
+
+    .navbar.scrolled {
+        background: transparent !important;
+        padding: 10px 10px !important;
+    }
+
+    .logo {
+        background-color: white;
+        padding: 12px;
+        border-radius: 10px;
+        box-shadow: 0 2px 20px rgba(112, 112, 112, 0.3);
+        z-index: 999;
+    }
+
+    .logo img {
+        width: 48px;
+    }
+
+    .nav-links {
+        display: none !important;
+    }
+
+    /* Tampilkan Mobile Container */
+    .mobile-nav-container {
+        display: block;
+        position: relative;
+    }
+
+    .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.2); /* Warna hitam transparan (40%) */
+        backdrop-filter: blur(
+            1px
+        ); /* Efek blur pada konten belakang (opsional) */
+        -webkit-backdrop-filter: blur(4px); /* Support Safari */
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            opacity 0.3s ease,
+            visibility 0.3s ease;
+        z-index: 998; /* Berada di bawah pill-card-wrapper */
+    }
+
+    /* Tampilkan Overlay saat Menu Terbuka */
+    .nav-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .pill-card-wrapper {
+        background-color: white;
+        border-radius: 16px;
+        overflow: hidden;
+        width: max-content;
+        box-shadow: 0 2px 20px rgba(112, 112, 112, 0.3);
+        transition: border-radius 0.3s ease;
+        position: absolute;
+        z-index: 999;
+        right: 0;
+        top: -27px;
+    }
+
+    /* Pill Card (Gambar 2) */
+    .pill-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        /* padding: 6px; */
+        padding: 0px;
+        gap: 1px;
+    }
+
+    /* Custom Hamburger Icon */
+    .hamburger-btn {
+        background: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        width: 55px;
+        height: 55px;
+        margin-left: 2px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .icon-line {
+        width: 16px;
+        height: 1px;
+        background-color: var(--color-primary);
+        display: block;
+        transition:
+            transform 0.25s ease,
+            opacity 0.25s ease;
+        position: absolute;
+    }
+
+    .line-1 {
+        transform: translateY(-5px);
+    }
+    .line-2 {
+        transform: translateY(0);
+    }
+    .line-3 {
+        transform: translateY(5px);
+    }
+
+    /* Transformasi ke 'X' saat class .active menyala (Gambar 3) */
+    .hamburger-btn.active .line-1 {
+        transform: rotate(45deg);
+    }
+    .hamburger-btn.active .line-2 {
+        opacity: 0;
+    }
+    .hamburger-btn.active .line-3 {
+        transform: rotate(-45deg);
+    }
+
+    /* Tombol Order Oranye */
+    .pill-book-btn {
+        background-color: var(--color-primary);
+        color: #ffffff;
+        font-weight: 400;
+        font-size: 14px;
+        padding: 15px 13px;
+        margin-right: 4px;
+        border-radius: 12px;
+        text-decoration: none;
+        letter-spacing: 0.5px;
+    }
+
+    .pill-book-btn:hover {
+        background-color: var(--color-primary-light);
+    }
+
+    /* Card Dropdown Menu (Gambar 3) */
+    .mobile-dropdown {
+        display: grid;
+        grid-template-rows: 0fr;
+        padding: 0px 0;
+        opacity: 0;
+        transition:
+            grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+            opacity 0.25s ease,
+            padding 0.35s ease;
+    }
+
+    .pill-card-wrapper.is-open {
+        width: max-content; /* Lebar dropdown saat terbuka */
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .pill-card-wrapper.is-open .mobile-dropdown {
+        grid-template-rows: 1fr;
+        opacity: 1;
+    }
+
+    .mobile-dropdown-inner {
+        overflow: hidden;
+        padding: 0 12px;
+    }
+
+    .pill-card-wrapper.is-open .mobile-dropdown-inner {
+        padding: 8px 12px 20px 12px; /* Padding hanya aktif saat dibuka */
+    }
+
+    .mobile-dropdown a {
+        display: block;
+        text-align: center;
+        padding: 10px 16px;
+        color: rgb(77, 77, 77);
+        font-size: 13px;
+        text-decoration: none;
+        letter-spacing: 1px;
+        transition:
+            color 0.2s ease,
+            transform 0.2s ease;
+    }
+
+    .mobile-dropdown a.active,
+    .mobile-dropdown a:hover {
+        color: var(--color-primary-light);
+        font-weight: 800;
+        transform: translateY(-1px);
+    }
+}
+
+/* Animasi Smooth Dropdown */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
