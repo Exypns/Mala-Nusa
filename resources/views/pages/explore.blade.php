@@ -5,10 +5,10 @@
 @section('content')
 
 <section class="featured-section">
-    <div class="featured-grid">
+    <div class="featured-grid animate-scroll">
       
       <!-- Content Area -->
-      <div class="featured-content">
+      <div class="featured-content ">
         <span class="location-badge">West Manggarai, Flores</span>
         <h1 class="featured-title">Warloka Pesisir</h1>
         
@@ -23,66 +23,48 @@
 
       <!-- Image Area -->
       <div class="featured-media">
-        <img src="{{ asset('images/first.jpg') }} " alt="Warloka Pesisir Pier" class="featured-image">
+        <img src="{{ asset('images/experience-placeholder.jpg') }} " alt="Warloka Pesisir Pier" class="featured-image">
       </div>
 
     </div>
   </section>
 
   <section class="experiences">
-    <div class="container-">
-        <div class="section-header">
+    <div class="container">
+        <div class="section-header animate-scroll">
             <h3 class="experience-title">THREE EXPERIENCES ONE VILLAGE</h3>
             <h2 class="experience-second-title">Choose how deep you want to go</h2>
         </div>
         <div class="experience-grid">
-            <article class="experience-card">
+            @foreach ( $experience as $experience )
+            <article class="experience-card animate-scroll">
                 <div class="card-image">
-                    <img src="images/welcomesection.jpg" />
-                </div>
-                <div class="card-content">
-                    <h3>A Full Day in Warloka Pesisir</h3>
-                    <p class="duration">
-                        Full day · 6-7 hours
-                    </p>
-                    <p class="card-description">
-                        Megalithic stones, local lunch from the women's collective,mangrove planting, and sunset over the Komodo archipelago.
-                    </p>
-                    <div class="card-footer">
-                        <div class="price">
-                            <strong>Rp 800.000</strong>
-                            <span>/ person</span>
-                        </div>
-                        <a href="{{ route('details') }}" class="card-detail-btn">
-                            <span>Details</span>
-                            <span class="icon-circle">
-                                <img class="arrow-icon" src="icons/ic_arrow.svg">
-                            </span>
-                        </a>
-                    </div>
-                </div>
-            </article>
-            <article class="experience-card">
-                <div class="card-image">
+                  @if ($experience->is_most_booked)
                     <span class="card-badge">
-                        ⭐ Most Booked
+                        <img src="{{ asset('icons/ic-star.svg') }}" alt="star-icon"> 
+                        <p>Most Booked</p>
                     </span>
-                    <img src="images/welcomesection.jpg" />
+                  @endif
+                      <img 
+                        src="{{ $experience->coverImage?->image
+                        ? Storage::url($experience->coverImage->image)
+                        : asset('images/experience-placeholder.jpg') }}"
+                        alt="{{ $experience->coverImage->alt_text ?? $experience->title }}" />
                 </div>
                 <div class="card-content">
-                    <h3>A Full Day in Warloka Pesisir</h3>
+                    <h3>{{ $experience->title }}</h3>
                     <p class="duration">
-                        Full day · 6-7 hours
+                        {{ $experience->duration }}
                     </p>
                     <p class="card-description">
-                        Megalithic stones, local lunch from the women's collective,mangrove planting, and sunset over the Komodo archipelago.
+                        {{ $experience->short_description }}
                     </p>
                     <div class="card-footer">
                         <div class="price">
-                            <strong>Rp 800.000</strong>
+                            <strong>Rp {{ number_format($experience->price, 0, ',', '.') }}</strong>
                             <span>/ person</span>
                         </div>
-                        <a href="{{ route('details') }}" class="card-detail-btn">
+                        <a href="{{ route('explore.show', $experience) }}" class="card-detail-btn">
                             <span>Details</span>
                             <span class="icon-circle">
                                 <img class="arrow-icon" src="icons/ic_arrow.svg">
@@ -91,32 +73,7 @@
                     </div>
                 </div>
             </article>
-            <article class="experience-card">
-                <div class="card-image">
-                    <img src="images/welcomesection.jpg" />
-                </div>
-                <div class="card-content">
-                    <h3>A Full Day in Warloka Pesisir</h3>
-                    <p class="duration">
-                        Full day · 6-7 hours
-                    </p>
-                    <p class="card-description">
-                        Megalithic stones, local lunch from the women's collective,mangrove planting, and sunset over the Komodo archipelago.
-                    </p>
-                    <div class="card-footer">
-                        <div class="price">
-                            <strong>Rp 800.000</strong>
-                            <span>/ person</span>
-                        </div>
-                        <a href="#" class="card-detail-btn">
-                            <span>Details</span>
-                            <span class="icon-circle">
-                                <img class="arrow-icon" src="icons/ic_arrow.svg">
-                            </span>
-                        </a>
-                    </div>
-                </div>
-            </article>
+            @endforeach
         </div>
     </div>
 </section>
@@ -125,7 +82,7 @@
     <div class="info-grid-container">
       
       <!-- Column 1: Included Features -->
-      <div class="info-column">
+      <div class="info-column animate-scroll">
         <div class="column-header">
           <div class="icon-wrapper">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -146,7 +103,7 @@
       </div>
 
       <!-- Column 2: Private & Custom Trips -->
-      <div class="info-column">
+      <div class="info-column animate-scroll">
         <div class="column-header">
           <div class="icon-wrapper">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -168,7 +125,7 @@
       </div>
 
       <!-- Column 3: Booking Policy -->
-      <div class="info-column">
+      <div class="info-column animate-scroll">
         <div class="column-header">
           <div class="icon-wrapper">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
