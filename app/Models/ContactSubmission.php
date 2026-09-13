@@ -6,5 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContactSubmission extends Model
 {
-    protected $fillable = ['name', 'email', 'message'];
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'email',
+        'subject',
+        'message',
+        'status'
+    ];
 }

@@ -10,8 +10,10 @@ class ExperienceScheduleDay extends Model
         'experience_schedule_id',
         'day_number',
         'title',
-        'sort_order'
+        'sort_order'    
     ];
+
+    protected $touches = ['schedule'];
 
     public function schedule() {
         return $this->belongsTo(ExperienceSchedule::class);

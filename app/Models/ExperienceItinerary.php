@@ -14,6 +14,8 @@ class ExperienceItinerary extends Model
         'sort_order'
     ];
 
+    protected $touches = ['scheduleDay'];
+
     public function scheduleDay() {
         return $this->belongsTo(ExperienceScheduleDay::class);
     }

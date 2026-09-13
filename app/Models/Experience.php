@@ -13,6 +13,8 @@ class Experience extends Model
         'slug',
         'short_description',
         'description',
+        'duration',
+        'location',
         'price',
         'min_guests',
         'max_guests',

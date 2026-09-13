@@ -12,6 +12,8 @@ class ExperienceStay extends Model
         'sort_order'
     ];
 
+    protected $touches = ['experience'];
+
     public function experience() {
         return $this->belongsTo(Experience::class);
     }
