@@ -3,7 +3,11 @@
       
       <!-- Kolom 1: Brand Logo & Short Desc -->
       <div class="footer-brand">
-        <a href="/" class="footer-logo">mala<br>nusa</a>
+        <a href="{{ route('home') }}" class="footer-logo">
+          <img
+          src="{{ asset('images/logo-white.png') }}"
+          alt="Mala Nusa" />
+        </a>
         <span class="footer-tagline">Travel · Empower · Restore</span>
         <p class="footer-description">
           Regenerative travel in Warloka Pesisir, West Flores. Community-led. Conservation-integrated. Honestly priced.
@@ -42,7 +46,6 @@
           <div class="footer-contact-list">
             <!-- WhatsApp -->
             <a href="https://wa.me/6281138274321" target="_blank" rel="noopener noreferrer" class="footer-contact-item">
-
               @include('icons.ic-wa', ['class' => 'footer-contact-icon-wa'])
               +62 811 3827 431
             </a>
