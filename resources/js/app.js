@@ -1,19 +1,43 @@
+import "./contact";
+
 (function () {
     const navbar = document.getElementById("navbar");
     const sentinel = document.getElementById("scroll-sentinel");
+    const logo = document.getElementById("navbar-logo");
 
-    if (!navbar || !sentinel) return;
+    if (!navbar || !sentinel || !logo) return;
+
+    const mobileQuery = window.matchMedia("(max-width: 960px)");
+    const alwaysGreen = logo.dataset.alwaysGreen === "true";
+
+    let isSentinelVisible = true;
+
+    function updateNavbar() {
+        const isScrolled = !isSentinelVisible;
+
+        navbar.classList.toggle("scrolled", isScrolled);
+
+        const useGreenLogo = mobileQuery.matches || alwaysGreen || isScrolled;
+
+        logo.src = useGreenLogo
+            ? logo.dataset.logoGreen
+            : logo.dataset.logoWhite;
+    }
 
     const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                // Jika pemicu (sentinel) TIDAK terlihat di layar = halaman sedang discroll ke bawah
-                if (!entry.isIntersecting) {
-                    navbar.classList.add("scrolled");
-                } else {
-                    navbar.classList.remove("scrolled");
-                }
-            });
+        ([entry]) => {
+            // entries.forEach((entry) => {
+            //     // Jika pemicu (sentinel) TIDAK terlihat di layar = halaman sedang discroll ke bawah
+            //     if (!entry.isIntersecting) {
+            //         navbar.classList.add("scrolled");
+            //         logo.src = logo.dataset.logoGreen;
+            //     } else {
+            //         navbar.classList.remove("scrolled");
+            //         logo.src = logo.dataset.logoWhite;
+            //     }
+            // });
+            isSentinelVisible = entry.isIntersecting;
+            updateNavbar();
         },
         {
             root: null, // memantau viewport utama
@@ -22,21 +46,56 @@
     );
 
     observer.observe(sentinel);
+    mobileQuery.addEventListener("change", updateNavbar);
+
+    updateNavbar();
 })();
 
-document.addEventListener("DOMContentLoaded", () => {
-    const btnToggle = document.getElementById("btnToggle");
-    const navDock = document.getElementById("navDock");
-    const menuBackdrop = document.getElementById("menuBackdrop");
+// RESPONSIVE NAVBAR
+document.addEventListener("DOMContentLoaded", function () {
+    const btn = document.getElementById("mobileMenuBtn");
+    const wrapper = document.getElementById("pillWrapper");
+    const overlay = document.getElementById("navOverlay");
+
+    // if (btn && wrapper) {
+    //     btn.addEventListener('click', function (e) {
+    //         e.stopPropagation();
+    //         btn.classList.toggle('active');
+    //         wrapper.classList.toggle('is-open')
+    //     });
+
+    //     // Tutup menu jika pengguna mengklik area di luar menu
+    //     document.addEventListener('click', function (e) {
+    //         if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+    //             btn.classList.remove('active');
+    //             dropdown.classList.remove('is-open');
+    //         }
+    //     });
+    // }
 
     function toggleMenu() {
-        navDock.classList.toggle("open");
-        menuBackdrop.classList.toggle("active");
+        const isOpen = wrapper.classList.toggle("is-open");
+        btn.classList.toggle("active", isOpen);
+        overlay.classList.toggle("active", isOpen);
     }
 
-    if (btnToggle) {
-        btnToggle.addEventListener("click", toggleMenu);
-        menuBackdrop.addEventListener("click", toggleMenu);
+    function closeMenu() {
+        wrapper.classList.remove("is-open");
+        btn.classList.remove("active");
+        overlay.classList.remove("active");
+    }
+
+    if (btn && wrapper && overlay) {
+        // Toggle saat tombol hamburger diklik
+        btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            toggleMenu();
+        });
+
+        // Tutup menu jika klik area luar / overlay
+        overlay.addEventListener("click", function () {
+            closeMenu();
+        });
     }
 });
 
@@ -62,6 +121,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const animatedElements = document.querySelectorAll(".animate-scroll");
     animatedElements.forEach((el) => scrollObserver.observe(el));
 });
+
+// SLIDER
 
 document.addEventListener("DOMContentLoaded", () => {
     const track = document.getElementById("sliderTrack");
@@ -167,4 +228,216 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Handle Resize Window
     window.addEventListener("resize", () => goToSlide(currentIndex));
+});
+
+// IMAGE FULL
+
+document.addEventListener("DOMContentLoaded", () => {
+    const slides = document.querySelectorAll(".slide");
+    const lightboxModal = document.getElementById("lightboxModal");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const lightboxCaption = document.getElementById("lightboxCaption");
+    const lightboxClose = document.getElementById("lightboxClose");
+    const lightboxPrev = document.getElementById("lightboxPrev");
+    const lightboxNext = document.getElementById("lightboxNext");
+
+    // Kumpulkan data gambar
+    const imageData = Array.from(slides).map((slide) => {
+        const img = slide.querySelector("img");
+        return {
+            src: img ? img.src : "",
+            alt: img ? img.alt : "",
+        };
+    });
+
+    let currentLightboxIndex = 0;
+    let isImageLoading = false; // Flag status loading untuk mencegah spam klik
+    let isDragging = false;
+    let startX = 0;
+
+    // Deteksi drag/swipe di Slider Utama
+    const sliderTrack = document.getElementById("sliderTrack");
+    if (sliderTrack) {
+        sliderTrack.addEventListener("mousedown", (e) => {
+            isDragging = false;
+            startX = e.clientX;
+        });
+
+        sliderTrack.addEventListener("mousemove", (e) => {
+            if (Math.abs(e.clientX - startX) > 10) isDragging = true;
+        });
+
+        sliderTrack.addEventListener(
+            "touchstart",
+            (e) => {
+                isDragging = false;
+                startX = e.touches[0].clientX;
+            },
+            { passive: true },
+        );
+
+        sliderTrack.addEventListener(
+            "touchmove",
+            (e) => {
+                if (Math.abs(e.touches[0].clientX - startX) > 10)
+                    isDragging = true;
+            },
+            { passive: true },
+        );
+    }
+
+    // Preload Gambar Kanan dan Kiri di Background (Cache Optimization)
+    const preloadAdjacentImages = (centerIndex) => {
+        if (imageData.length <= 1) return;
+        const nextIdx = (centerIndex + 1) % imageData.length;
+        const prevIdx = (centerIndex - 1 + imageData.length) % imageData.length;
+
+        [nextIdx, prevIdx].forEach((idx) => {
+            if (imageData[idx] && imageData[idx].src) {
+                const imgPreload = new Image();
+                imgPreload.src = imageData[idx].src;
+            }
+        });
+    };
+
+    // Switch Gambar Lightbox dengan Validasi Loading Jaringan
+    const showLightboxImage = (index) => {
+        if (imageData.length === 0 || isImageLoading) return;
+
+        const targetIndex = (index + imageData.length) % imageData.length;
+        const targetData = imageData[targetIndex];
+
+        isImageLoading = true;
+        lightboxModal.classList.add("is-loading");
+        lightboxImg.classList.add("fade-effect");
+
+        // Buat objek gambar sementara di memory untuk memantau unduhan di koneksi lambat
+        const tempImg = new Image();
+        tempImg.src = targetData.src;
+
+        tempImg.onload = () => {
+            currentLightboxIndex = targetIndex;
+            lightboxImg.src = targetData.src;
+            lightboxCaption.textContent = targetData.alt;
+
+            lightboxImg.classList.remove("fade-effect");
+            lightboxModal.classList.remove("is-loading");
+            isImageLoading = false;
+
+            // Otomatis preload gambar sebelum & sesudah agar perpindahan berikutnya instant
+            preloadAdjacentImages(targetIndex);
+        };
+
+        tempImg.onerror = () => {
+            // Handled jika gambar gagal dimuat akibat koneksi terputus
+            lightboxModal.classList.remove("is-loading");
+            lightboxImg.classList.remove("fade-effect");
+            isImageLoading = false;
+        };
+    };
+
+    // Buka Lightbox pada Index yang Diklik
+    slides.forEach((slide, index) => {
+        slide.addEventListener("click", () => {
+            if (isDragging) return;
+            showLightboxImage(index);
+            lightboxModal.classList.add("active");
+            document.body.style.overflow = "hidden";
+        });
+    });
+
+    // Navigasi Next & Prev
+    const nextLightbox = () => showLightboxImage(currentLightboxIndex + 1);
+    const prevLightbox = () => showLightboxImage(currentLightboxIndex - 1);
+
+    lightboxNext.addEventListener("click", (e) => {
+        e.stopPropagation();
+        nextLightbox();
+    });
+
+    lightboxPrev.addEventListener("click", (e) => {
+        e.stopPropagation();
+        prevLightbox();
+    });
+
+    // Fitur Swipe di Lightbox
+    let lbStartX = 0;
+    let lbEndX = 0;
+
+    lightboxModal.addEventListener(
+        "touchstart",
+        (e) => {
+            lbStartX = e.touches[0].clientX;
+        },
+        { passive: true },
+    );
+
+    lightboxModal.addEventListener(
+        "touchend",
+        (e) => {
+            lbEndX = e.changedTouches[0].clientX;
+            const diff = lbStartX - lbEndX;
+            if (Math.abs(diff) > 40) {
+                if (diff > 0) nextLightbox();
+                else prevLightbox();
+            }
+        },
+        { passive: true },
+    );
+
+    // Event Stop Propagation
+    const preventPropagation = (selector) => {
+        document.querySelectorAll(selector).forEach((el) => {
+            el.addEventListener("click", (e) => e.stopPropagation());
+        });
+    };
+    preventPropagation(".nav-arrow");
+    preventPropagation(".hero-info-card");
+    preventPropagation(".slider-indicators");
+
+    // Tutup Lightbox
+    const closeLightbox = () => {
+        lightboxModal.classList.remove("active");
+        document.body.style.overflow = "";
+    };
+
+    lightboxClose.addEventListener("click", closeLightbox);
+    lightboxModal.addEventListener("click", (e) => {
+        if (e.target === lightboxModal) closeLightbox();
+    });
+
+    // Navigasi Keyboard
+    document.addEventListener("keydown", (e) => {
+        if (!lightboxModal.classList.contains("active")) return;
+        if (e.key === "Escape") closeLightbox();
+        if (e.key === "ArrowRight") nextLightbox();
+        if (e.key === "ArrowLeft") prevLightbox();
+    });
+});
+
+// SCHEDULE TAB
+
+const scheduleTabs = document.querySelectorAll(".schedule-tab");
+const schedulePanels = document.querySelectorAll(".schedule-panel");
+
+scheduleTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+        const scheduleId = tab.dataset.schedule;
+
+        scheduleTabs.forEach((item) => {
+            item.classList.remove("is-active");
+        });
+
+        schedulePanels.forEach((panel) => {
+            panel.classList.remove("is-active");
+        });
+
+        tab.classList.add("is-active");
+
+        const targetPanel = document.querySelector(
+            `[data-schedule-panel="${scheduleId}"]`,
+        );
+
+        targetPanel?.classList.add("is-active");
+    });
 });

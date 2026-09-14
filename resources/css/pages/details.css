@@ -3,7 +3,7 @@
     width: 100%;
     max-width: 1100px;
     margin: 0 auto;
-    padding: 100px 24px 40px; /* Top padding disesuaikan agar tidak tertutup navbar */
+    padding: 110px 24px 20px; /* Top padding disesuaikan agar tidak tertutup navbar */
 }
 
 /* Breadcrumbs */
@@ -35,7 +35,7 @@
 .slider-container {
     position: relative;
     width: 100%;
-    height: 480px;
+    height: 500px;
     border-radius: 24px;
     overflow: hidden;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
@@ -61,6 +61,7 @@
     min-width: 100%;
     height: 100%;
     position: relative;
+    cursor: pointer;
 }
 
 .slide img {
@@ -173,19 +174,191 @@
     fill: none;
 }
 
+/* ================= LIGHTBOX MODAL STYLES ================= */
+.lightbox-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 15, 10, 0.9);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+    padding: 20px;
+}
+
+.lightbox-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-img {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.lightbox-modal.active .lightbox-img {
+    transform: scale(1);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 10000;
+}
+
+.lightbox-close img {
+    padding-top: 1px;
+    padding-right: 1px;
+    width: 20px;
+    height: 20px;
+    stroke: #ffffff;
+    fill: none;
+}
+
+.lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.lightbox-caption {
+    position: absolute;
+    bottom: 24px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 14px;
+    text-align: center;
+    letter-spacing: 0.3px;
+}
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 10000;
+}
+
+.lightbox-nav svg {
+    width: 22px;
+    height: 22px;
+}
+
+.lightbox-nav:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-50%) scale(1.08);
+}
+
+.lightbox-nav.prev {
+    left: 100px;
+}
+
+.lightbox-nav.next {
+    right: 100px;
+}
+
+/* Smooth Fade Effect saat ganti gambar di Lightbox */
+.lightbox-img.fade-effect {
+    opacity: 0.3;
+    transform: scale(0.97);
+    transition: all 0.15s ease;
+}
+
+/* Spinner indikator loading pada Lightbox */
+.lightbox-loader {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: lightboxSpin 0.8s linear infinite;
+    display: none;
+    z-index: 9998;
+}
+
+.lightbox-modal.is-loading .lightbox-loader {
+    display: block;
+}
+
+@keyframes lightboxSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Kunci status cursor navigasi saat proses muat gambar */
+.lightbox-modal.is-loading .lightbox-nav {
+    opacity: 0.5;
+    cursor: wait;
+}
+
+@media (max-width: 900px) {
+    .lightbox-nav.prev {
+        left: 30px;
+    }
+    .lightbox-nav.next {
+        right: 30px;
+    }
+}
+
+/* Penyesuaian layar HP */
+@media (max-width: 600px) {
+    .lightbox-nav {
+        width: 40px;
+        height: 40px;
+    }
+    .lightbox-nav.prev {
+        left: 32px;
+    }
+    .lightbox-nav.next {
+        right: 32px;
+    }
+}
+
 /* Container Section Utama */
 .overview-section {
     width: 100%;
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0px 24px 80px;
+    padding: 20px 24px 20px;
 }
 
 .overview-title {
     font-size: 32px;
     font-weight: 700;
     color: #1a1a1a;
-    margin-bottom: 32px;
+    margin-bottom: 10px;
     letter-spacing: -0.5px;
 }
 
@@ -228,7 +401,7 @@
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 12px;
 }
 
 .spec-item {
@@ -282,6 +455,7 @@
 
 .overview-btn-primary:hover {
     background-color: #435442;
+    transition: 0.3s;
 }
 
 .overview-btn-outline {
@@ -300,7 +474,7 @@
 }
 
 .overview-btn-outline:hover {
-    background-color: rgba(83, 103, 82, 0.05);
+    background-color: rgba(132, 187, 129, 0.1);
 }
 
 /* Container Utama Section */
@@ -308,24 +482,96 @@
     width: 100%;
     max-width: 1100px;
     margin: 0 auto;
-    padding: 60px 24px;
+    padding: 30px 24px;
 }
 
 .timeline-title {
     font-size: 32px;
     font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 48px;
+    color: var(--color-title-text);
+    margin-bottom: 25px;
     letter-spacing: -0.5px;
+}
+
+.schedule-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.schedule-tab {
+    flex: 1;
+    padding: 12px 20px;
+
+    border: 1px solid #dcdcdc;
+    border-radius: 15px;
+
+    background-color: #ffffff;
+    color: var(--color-title-text);
+
+    cursor: pointer;
+    color: #555555;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.schedule-tab:hover {
+    border-color: #536752;
+    background-color: #f0f4ef;
+    box-shadow: 0 6px 16px rgba(45, 59, 45, 0.08);
+}
+
+.schedule-tab-title {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.schedulte-tab-description {
+    display: block;
+    margin-top: 6px;
+    font-size: 14px;
+}
+
+.schedule-tab.is-active {
+    background-color: var(--color-primary);
+    border-color: var(--color-secondary);
+    color: #ffffff;
+}
+
+/* timeline yang tidak aktif disembunyikan */
+.schedule-panel {
+    display: none;
+}
+
+.schedule-panel.is-active {
+    display: block;
+}
+
+@media (max-width: 640px) {
+    .schedule-tabs {
+        /* flex-direction: column; */
+    }
+
+    .schedule-tab {
+        flex: 1;
+    }
 }
 
 /* Grid Layout Timeline */
 /* 1. Atur Grid & Hilangkan Gap Horizontal untuk Garis Menyambung */
+.itinerary-day-title {
+    grid-column: 1 / -1;
+    margin-bottom: -18px;
+    color: var(--color-title-text);
+    font-size: 17px;
+}
+
 .timeline-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    column-gap: 0; /* Ubah gap jadi 0 agar garis saling bersentuhan */
-    row-gap: 50px;
+    column-gap: 0;
+    row-gap: 30px;
 }
 
 /* Berikan padding pada item agar teks antar kolom tidak bertabrakan */
@@ -352,7 +598,7 @@
     position: absolute;
     left: 0;
     top: 50%;
-    width: 100%; /* Garis membentang penuh ke tepi item berikutnya */
+    width: calc(100% + 24px);
     height: 2px;
     background-color: #a4b4a2;
     transform: translateY(-50%);
@@ -388,7 +634,7 @@
 .timeline-item-title {
     font-size: 16px;
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--color-title-text);
     line-height: 1.35;
     margin-bottom: 8px;
 }
@@ -400,11 +646,11 @@
 }
 
 /* Section Container */
-.info-section {
+.detail-info-section {
     width: 100%;
     max-width: 1100px;
     margin: 0 auto;
-    padding: 20px 24px 100px;
+    padding: 20px 24px 60px;
 }
 
 .info-grid {
@@ -417,7 +663,7 @@
 .section-subtitle {
     font-size: 24px;
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--color-title-text);
     margin-bottom: 28px;
 }
 
@@ -505,10 +751,10 @@
     width: 100%;
     max-width: 900px;
     margin: 0 auto;
-    padding: 0px 24px 100px;
+    padding: 0px 24px 50px;
     display: flex;
     flex-direction: column;
-    gap: 56px;
+    gap: 45px;
 }
 
 /* --- TRANSPARENCY CARD (Where your money goes) --- */
@@ -536,12 +782,12 @@
 }
 
 .transparency-badge {
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 700;
     letter-spacing: 1.2px;
     text-transform: uppercase;
     color: #d2ded0; /* Soft Light Sage */
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     display: inline-block;
 }
 
@@ -549,7 +795,7 @@
     font-size: 28px;
     font-weight: 700;
     line-height: 1.25;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
     letter-spacing: -0.3px;
 }
 
@@ -568,7 +814,7 @@
 .faq-main-title {
     font-size: 26px;
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--color-title-text);
     letter-spacing: -0.3px;
 }
 
@@ -663,7 +909,7 @@
     font-weight: 700;
     color: #1a1a1a;
     letter-spacing: -0.5px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     line-height: 1.2;
 }
 
@@ -673,7 +919,7 @@
     color: #555555;
     max-width: 540px;
     line-height: 1.5;
-    margin-bottom: 32px;
+    margin-bottom: 20px;
 }
 
 /* Wrapper Tombol CTA */
@@ -682,7 +928,7 @@
     align-items: center;
     justify-content: center;
     gap: 16px;
-    margin-bottom: 28px;
+    margin-bottom: 0px;
     flex-wrap: wrap;
 }
 
@@ -701,39 +947,37 @@
     cursor: pointer;
 }
 
-/* Tombol Utama (Primary) - WhatsApp */
-.details-cta-btn-primary {
-    background-color: #536752;
-    color: #ffffff;
-    border: 2px solid #536752;
-    box-shadow: 0 4px 14px rgba(83, 103, 82, 0.25);
-}
-
-.details-cta-btn-primary:hover {
-    background-color: #425341;
-    border-color: #425341;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(83, 103, 82, 0.35);
-}
-
-.details-cta-btn-primary:active {
-    transform: translateY(0);
-}
-
-/* Tombol Kedua (Secondary) - See Other Experiences */
-.details-cta-btn-secondary {
+.details-action-chip {
     background-color: transparent;
-    color: #536752;
-    border: 2px solid #536752;
+    color: #536752 !important;
+    border: 1px solid #536752;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 }
 
-.details-cta-btn-secondary:hover {
-    background-color: rgba(83, 103, 82, 0.08);
+.details-action-chip:hover {
+    border-color: #536752;
+    background-color: #f5f5f5;
     transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(45, 59, 45, 0.08);
 }
 
-.details-cta-btn-secondary:active {
-    transform: translateY(0);
+.details-action-chip.primary {
+    background-color: #536752;
+    color: #ffffff !important;
+    border-color: #536752;
+}
+
+.details-action-chip.primary:hover {
+    background-color: #425341;
 }
 
 /* Metadata Footer Info */
@@ -825,11 +1069,11 @@
 @media (max-width: 768px) {
     .info-grid {
         grid-template-columns: 1fr;
-        gap: 48px;
+        gap: 30px;
     }
 
-    .info-section {
-        padding: 40px 20px 60px;
+    .detail-info-section {
+        padding: 0px 20px 40px;
     }
 }
 
@@ -839,40 +1083,70 @@
     .timeline-grid {
         grid-template-columns: repeat(3, 1fr);
     }
+
     .timeline-item.last-in-row {
         grid-column: auto;
     }
 }
 
-/* Mobile (Berubah ke Timeline Vertikal) */
-@media (max-width: 640px) {
+@media (max-width: 760px) {
     .timeline-grid {
         grid-template-columns: 1fr;
-        row-gap: 32px;
-        padding-left: 20px;
+        row-gap: 0;
     }
 
-    .timeline-node::before {
-        width: 2px !important;
-        height: calc(100% + 40px);
-        left: 7px;
-        top: 8px;
-        transform: none;
+    .itinerary-day-title {
+        grid-column: 1;
+        margin-bottom: 24px;
+        font-size: 16px;
     }
 
     .timeline-item {
-        padding-left: 24px;
+        position: relative;
+        padding-right: 0;
+        padding-left: 36px;
+        padding-bottom: 32px;
+    }
+
+    /* Matikan garis horizontal desktop */
+    .timeline-node::before {
+        display: none;
     }
 
     .timeline-node {
         position: absolute;
-        left: -20px;
+        left: 0;
         top: 0;
-        width: auto;
+
+        width: 18px;
+        height: 18px;
+
+        margin-bottom: 0;
     }
 
-    .timeline-item.last-in-row .timeline-node::before {
-        display: none;
+    /* Garis vertikal mengikuti tinggi item */
+    .timeline-item:not(.last-in-row)::before {
+        content: "";
+        position: absolute;
+
+        left: 8px;
+        top: 18px;
+
+        width: 2px;
+        height: calc(100% - 18px);
+
+        background-color: #a4b4a2;
+
+        z-index: 1;
+    }
+
+    .timeline-dot {
+        position: relative;
+        z-index: 2;
+    }
+
+    .timeline-time {
+        margin-bottom: 6px;
     }
 }
 
@@ -880,24 +1154,29 @@
 @media (max-width: 868px) {
     .overview-grid {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 20px;
+    }
+
+    .overview-section {
+        padding-bottom: 0px;
+        padding-top: 0px;
     }
 
     .overview-sidebar {
         position: static; /* Hilangkan sticky di layar kecil */
-        order: -1; /* Pindahkan card ke atas di mobile jika diperlukan, atau hapus baris ini agar tetap di bawah */
+        order: 1; /* Pindahkan card ke atas di mobile jika diperlukan, atau hapus baris ini agar tetap di bawah */
     }
 
     .overview-title {
         font-size: 26px;
-        margin-bottom: 24px;
+        margin-bottom: 12px;
     }
 }
 
 /* Responsive */
 @media (max-width: 768px) {
     .detail-hero-section {
-        padding: 80px 16px 24px;
+        padding: 95px 16px 24px;
     }
 
     .slider-container {
