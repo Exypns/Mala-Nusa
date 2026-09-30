@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContactSubmissionController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImpactController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -15,8 +16,12 @@ Route::get('/explore', [ExperienceController::class, 'index'])
 Route::get('/explore/{experience:slug}', [ExperienceController::class, 'show'])
     ->name('explore.show');
 
-Route::view('/impact', 'pages.impact')->name('impact');
+Route::get('/impact', [ImpactController::class, 'index'])
+    ->name('impact');
 
-Route::view('/contact', 'pages.contact')->name('contact');
+Route::view('/contact', 'pages.contact')
+    ->name('contact');
 
-Route::post('/contact', [ContactSubmissionController::class, 'store'])->name('contact.store');
+Route::post('/contact', [ContactSubmissionController::class, 'store'])
+    ->middleware('throttle:5,1')
+    ->name('contact.store');
